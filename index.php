@@ -9,6 +9,10 @@
 
 	}
 
+	if (isset($_COOKIE['UID'])) {
+   		setcookie('UID', '', time()-(60*60*24*7), '/loginDemo/', NULL, NULL, true);
+   	}
+
 
 ?>
 

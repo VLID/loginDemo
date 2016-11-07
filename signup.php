@@ -7,6 +7,10 @@
       	echo "<script>if (confirm(\"You've already logged in.\")) { window.location = \"shopping.php\"; };</script>";
    	}
 
+   	if (isset($_COOKIE['UID']) && !isset($_SESSION['UID'])) {
+   		setcookie('UID', '', time()-(60*60*24*7), '/loginDemo/', NULL, NULL, true);
+   	}
+
 	$error = "";
 	$success = false;
 

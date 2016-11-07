@@ -6,7 +6,11 @@
    if (isset($_COOKIE['UID']) && isset($_SESSION['UID'])) {
       echo "<script>if (confirm(\"You've already logged in.\")) { window.location = \"shopping.php\"; };</script>";
    }
-   
+
+   if (isset($_COOKIE['UID']) && !isset($_SESSION['UID'])) {
+      setcookie('UID', '', time()-(60*60*24*7), '/loginDemo/', NULL, NULL, true);
+   }
+
    $error = "";
    	
    $user = "";
@@ -47,7 +51,7 @@
          if(!$p_exist){
             $error = "Password invalid. Please try again.";
          }else{
-            setcookie('UID', md5($user), time()+(60*60*24*1), '/', NULL, NULL, true);
+            setcookie('UID', md5($user), time()+(60*60*24*1), '/loginDemo/', NULL, NULL, true);
             $_SESSION['username'] = $user;
             header("location: shopping.php");
          }

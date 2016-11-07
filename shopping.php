@@ -10,7 +10,7 @@
 	}
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
-		setcookie('UID', '', time()-(60*60*24*7), '/', NULL, NULL, true);
+		setcookie('UID', '', time()-(60*60*24*7), '/loginDemo/', NULL, NULL, true);
 		session_destroy();
 		echo "<script>if (confirm(\"You've already logged out.\")) { window.location = \"index.php\"; };</script>";
 	}
