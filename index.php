@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+	session_start();
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST['login'])) {
@@ -9,7 +11,7 @@
 
 	}
 
-	if (isset($_COOKIE['UID'])) {
+	if (isset($_COOKIE['UID']) && !isset($_SESSION['UID'])) {
    		setcookie('UID', '', time()-(60*60*24*7), '/loginDemo/', NULL, NULL, true);
    	}
 
