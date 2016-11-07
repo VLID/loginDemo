@@ -2,8 +2,14 @@
 
 	include "mysql_config.php";
 	session_start();
-   	$error = "";
-   	$user = "";
+
+   if (isset($_COOKIE['UID']) && isset($_SESSION['UID'])) {
+      echo "<script>if (confirm(\"You've already logged in.\")) { window.location = \"shopping.php\"; };</script>";
+   }
+   
+   $error = "";
+   	
+   $user = "";
 
 	function clean_input($string) {
 	    $string = trim($string);
@@ -12,7 +18,7 @@
 	    return $string;
 	}
 
-	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
       if (!isset($_POST['username'])) {
          die();
@@ -60,8 +66,8 @@
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
 	<input type = "text" name = "username" placeholder="Username" />
 	<input type = "password" name = "password" placeholder="Password" AUTOCOMPLETE='OFF'/>
-	<input type="submit" name="submit" value="Submit" />
+	<input type="submit" name="login" value="Login" />
 </form>
-<div><?php echo $error; ?></div>
+<div style="color: red;"><?php echo $error; ?></div>
 </body>
 </html>
